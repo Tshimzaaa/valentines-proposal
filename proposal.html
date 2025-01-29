@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal | Tshimzaaa</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="decorations">Will you be my Valentine? 💞</h2>
+        <div class="buttons">
+            <button class="button yes-button">💖 Yes</button>
+            <button class="button no-button">💔 No</button>
+        </div>
+    </div>
+
+    <script>
+        const noButton = document.querySelector('.no-button');
+        const yesButton = document.querySelector('.yes-button');
+
+        noButton.addEventListener('mouseover', function() {
+            const x = Math.random() * (window.innerWidth - this.offsetWidth);
+            const y = Math.random() * (window.innerHeight - this.offsetHeight);
+            this.style.position = 'absolute';
+            this.style.left = `${x}px`;
+            this.style.top = `${y}px`;
+        });
+
+        yesButton.addEventListener('click', showFinalMessage);
+
+        function showFinalMessage() {
+            document.body.innerHTML = `
+                <div class="container">
+                    <h1 class="decorations">We are together forever, my love! 💞🥰</h1>
+                    <a href="index.html" class="back-link">← Back to Start</a>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
