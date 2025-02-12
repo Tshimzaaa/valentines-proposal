@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proposal | Tshimzaaa</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Add EmailJS Library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init('OJSG_cOX4keD0tiPJ'); // Replace with your EmailJS public key
+        })();
+    </script>
 </head>
 <body>
     <div class="container">
@@ -27,12 +34,24 @@
         const yesButton = document.querySelector('.yes-button');
         const question = document.getElementById('question');
 
+        function sendResponse(response) {
+            emailjs.send('service_tshimzaaa', 'template_u181rop', {
+                response_type: 'Valentine Proposal',
+                user_response: response
+            }).then(
+                () => console.log('Response recorded'),
+                (error) => console.error('Error:', error)
+            );
+        }
+
         yesButton.addEventListener('click', function() {
             if(yesClicks < 2) {
                 question.textContent = messages[yesClicks];
                 yesClicks++;
+                if(yesClicks === 1) sendResponse('First Yes');
+                if(yesClicks === 2) sendResponse('Second Yes');
             } else {
-                sendEmail('Yes');
+                sendResponse('Final Yes');
                 showFinalMessage();
             }
         });
@@ -40,7 +59,7 @@
         noButton.addEventListener('click', function() {
             question.innerHTML = "😢 My heart is broken... 💔 But I'll always hope 💖";
             document.querySelector('.buttons').innerHTML = '';
-            sendEmail('No');
+            sendResponse('No');
         });
 
         function showFinalMessage() {
@@ -50,12 +69,6 @@
                     <a href="index.html" class="back-link">← Back to Start</a>
                 </div>
             `;
-        }
-
-        function sendEmail(response) {
-            const subject = `Valentine's Proposal Response: ${response}`;
-            const body = `User responded: ${response}`;
-            window.location.href = `mailto:tshimochiloane@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         }
     </script>
 </body>
